@@ -1,0 +1,22 @@
+// WAYFARER — global stylesheet entry
+@use 'base/reset';
+@use 'base/typography';
+@use 'base/global';
+
+@use 'components/buttons';
+@use 'components/forms';
+@use 'components/overlays';
+@use 'components/shared';
+@use 'components/search';
+@use 'components/cards';
+
+@use 'layouts/header';
+@use 'layouts/footer';
+
+@use 'pages/home';
+@use 'pages/destination';
+@use 'pages/stays';
+@use 'pages/hotel';
+@use 'pages/booking';
+@use 'pages/trips';
+@use 'pages/content';

@@ -1,0 +1,18 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.stays { &__layout { display: grid; grid-template-columns: 290px 1fr; gap: 40px; margin-top: 32px; align-items: start; @include down($bp-lg) { grid-template-columns: 1fr; } }
+  &__sidebar { position: sticky; top: calc(#{$header-h} + 20px); max-height: calc(100vh - #{$header-h} - 40px); overflow-y: auto; padding-right: 8px; scrollbar-width: thin; @include down($bp-lg) { display: none; } }
+  &__toolbar { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px solid $border; .select-inline { margin-left: auto; } @include down($bp-lg) { .select-inline { margin-left: 0; } } }
+  &__count { font-family: $font-heading; font-size: 1.5rem; font-weight: 500; }
+  &__filter-btn { display: none; @include down($bp-lg) { display: inline-flex; } } }
+
+.view-toggle { display: inline-flex; border: 1px solid $border; border-radius: $radius; overflow: hidden; background: $surface; button { width: 42px; height: 40px; display: grid; place-items: center; color: $text-muted; &.is-active { background: $accent; color: $on-accent; } } }
+.filter-tags { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 22px; }
+.filter-tag { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px 7px 14px; border-radius: 999px; background: $accent; color: $on-accent; font-size: 0.8rem; &:hover { background: $dark; } }
+
+.filters { &__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; h3 { font-size: 1.6rem; } }
+  .filter-group { border: 0; border-bottom: 1px solid $border; padding: 20px 0; margin: 0; legend { padding: 0; font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; color: $text-muted; margin-bottom: 12px; float: left; width: 100%; } legend + * { clear: both; } } }
+.drawer--filters .filters .filters__head { display: none; }
+
+.search-summary + .search-summary__count { }

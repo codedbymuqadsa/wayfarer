@@ -1,0 +1,35 @@
+// WAYFARER design tokens
+$bg: #0a1a24;
+$bg-alt: #0e2431;
+$text: #e8f1f4;
+$text-muted: #93acb7;
+$accent: #19b5c3;
+$accent-dark: #5fd4de;
+$accent-2: #ff7a59;
+$border: #21404f;
+$white: #ffffff;
+$surface: #122d3b;
+$on-accent: #04202a;
+$overlay: #04111a; // navy-black used over photography
+$dark: #05121a;
+$danger: #ff7468;
+$success: #5fd09a;
+
+$font-heading: var(--font-heading), 'Fraunces', Georgia, serif;
+$font-body: var(--font-body), 'Plus Jakarta Sans', system-ui, sans-serif;
+
+$container: 1280px;
+$gutter: 24px;
+$radius: 4px;
+$radius-lg: 10px;
+
+$bp-sm: 640px;
+$bp-md: 900px;
+$bp-lg: 1100px;
+
+$shadow-sm: 0 1px 2px rgba(36, 40, 32, 0.05), 0 2px 8px rgba(36, 40, 32, 0.04);
+$shadow-md: 0 8px 30px rgba(36, 40, 32, 0.08);
+$shadow-lg: 0 24px 60px rgba(36, 40, 32, 0.16);
+
+$ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+$header-h: 76px;

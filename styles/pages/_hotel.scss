@@ -1,0 +1,70 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.hotel-detail { padding: 28px 0 64px; }
+.hotel-header { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 28px;
+  h1 { font-size: clamp(2.2rem, 4.6vw, 3.8rem); margin: 10px 0 8px; }
+  &__meta { display: flex; align-items: center; gap: 12px; }
+  &__loc { display: flex; align-items: center; gap: 6px; color: $text-muted; a { text-decoration: underline; text-underline-offset: 3px; &:hover { color: $text; } } }
+  &__side { display: flex; flex-direction: column; align-items: flex-end; gap: 14px; @include down($bp-sm) { align-items: flex-start; } }
+  &__score { display: flex; align-items: center; gap: 12px; font-size: 0.95rem; font-weight: 600; .rating-badge { padding: 8px 12px; background: $accent; color: $on-accent; border-radius: 8px; .muted { color: rgba($white, 0.7); } strong { font-size: 1rem; } } }
+  &__btns { display: flex; gap: 10px; } }
+
+// Gallery
+.gallery { position: relative; display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 48px;
+  &__main { display: block; aspect-ratio: 16 / 8; border-radius: $radius-lg; overflow: hidden; cursor: zoom-in; img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s $ease; } &:hover img { transform: scale(1.02); } @include down($bp-sm) { aspect-ratio: 4 / 3; } }
+  &__thumbs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; @include down($bp-sm) { gap: 8px; } }
+  &__thumb { aspect-ratio: 4 / 3; border-radius: 8px; overflow: hidden; opacity: 0.65; transition: opacity 0.25s, outline-color 0.25s; outline: 2px solid transparent; outline-offset: -2px; img { width: 100%; height: 100%; object-fit: cover; } &:hover { opacity: 1; } &.is-active { opacity: 1; outline-color: $text; } }
+  &__all { position: absolute; right: 18px; top: 18px; box-shadow: $shadow-sm; } }
+.lightbox { position: relative; flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; padding: 20px 70px;
+  &__img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 6px; }
+  &__nav { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; background: rgba($white, 0.12); display: grid; place-items: center; color: $white; transition: background 0.2s; &:hover { background: rgba($white, 0.24); } &--prev { left: 12px; } &--next { right: 12px; } }
+  &__count { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); font-size: 0.82rem; color: rgba($white, 0.7); }
+  &__strip { display: flex; gap: 10px; padding: 14px 20px 20px; overflow-x: auto; justify-content: center; button { width: 84px; height: 58px; border-radius: 6px; overflow: hidden; opacity: 0.5; flex-shrink: 0; &.is-active, &:hover { opacity: 1; } img { width: 100%; height: 100%; object-fit: cover; } } }
+  @include down($bp-sm) { padding: 10px 6px; &__nav { width: 40px; height: 40px; background: rgba($dark, 0.6); } } }
+.modal--gallery .modal__panel--full { max-width: 1400px; }
+.modal--gallery .lightbox__img { max-height: calc(100vh - 230px); }
+
+// Layout
+.hotel-layout { display: grid; grid-template-columns: minmax(0, 1fr) 390px; gap: 64px; align-items: start; @include down($bp-lg) { grid-template-columns: 1fr; gap: 40px; }
+  &__main { display: grid; gap: 56px; section { h2 { font-size: clamp(1.9rem, 3vw, 2.5rem); margin-bottom: 18px; } h3 { font-size: 1.55rem; margin-bottom: 14px; } .lead { color: #c3d6dd; font-size: 1.1rem; margin-bottom: 8px; max-width: none; } } }
+  &__side { position: sticky; top: calc(#{$header-h} + 20px); @include down($bp-lg) { position: static; } } }
+
+.info-cards { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 18px; > div { display: flex; align-items: center; gap: 14px; padding: 16px 22px; background: $surface; border: 1px solid $border; border-radius: $radius-lg; min-width: 220px; svg { color: $accent-dark; } span { display: flex; flex-direction: column; } small { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: $text-muted; } strong { font-weight: 600; } } }
+.policy-list { display: grid; gap: 14px; li { display: flex; gap: 14px; align-items: flex-start; padding: 16px 20px; background: $surface; border: 1px solid $border; border-radius: $radius-lg; svg { color: $accent-dark; margin-top: 3px; flex-shrink: 0; } span { color: $text-muted; font-size: 0.94rem; } strong { display: block; color: $text; margin-bottom: 2px; } } }
+
+// Rooms
+.room-list { display: grid; gap: 16px; }
+.room-card { display: grid; grid-template-columns: 220px 1fr auto; gap: 24px; padding: 14px; background: $surface; border: 1px solid $border; border-radius: $radius-lg; transition: border-color 0.25s, box-shadow 0.25s; align-items: stretch;
+  &.is-selected { border-color: $accent; box-shadow: 0 0 0 1px $accent; }
+  &__media { border-radius: 8px; overflow: hidden; min-height: 150px; img { width: 100%; height: 100%; object-fit: cover; } }
+  &__body { padding: 8px 0; display: flex; flex-direction: column; gap: 12px; h4 { font-size: 1.6rem; } }
+  &__facts { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.86rem; color: $text-muted; li { display: inline-flex; align-items: center; gap: 6px; } }
+  &__amenities { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 0.84rem; li { display: inline-flex; align-items: center; gap: 5px; svg { color: $accent; } } }
+  &__side { display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between; gap: 14px; padding: 8px 10px 8px 0; text-align: right; }
+  &__price { display: flex; flex-direction: column; strong { font-family: $font-heading; font-size: 2rem; line-height: 1; } small { color: $text-muted; font-size: 0.78rem; } }
+  @include down($bp-md) { grid-template-columns: 1fr; &__side { flex-direction: row; align-items: center; padding: 0 8px 8px; text-align: left; } &__media { aspect-ratio: 16 / 9; } } }
+
+// Booking widget
+.booking-widget { background: $surface; border: 1px solid $border; border-radius: $radius-lg; padding: 28px; box-shadow: $shadow-md; display: flex; flex-direction: column; gap: 18px;
+  &__price { display: flex; justify-content: space-between; align-items: baseline; strong { font-family: $font-heading; font-size: 2.2rem; font-weight: 600; } small { color: $text-muted; } }
+  &__fields { display: grid; gap: 12px; }
+  &__note { font-size: 0.8rem; color: $text-muted; text-align: center; } }
+.price-lines { display: grid; gap: 10px; font-size: 0.92rem; padding-top: 14px; border-top: 1px solid $border;
+  > div { display: flex; justify-content: space-between; gap: 16px; } dt { color: $text-muted; } dd { margin: 0; font-weight: 500; }
+  &__total { padding-top: 12px; border-top: 1px solid $border; dt, dd { color: $text; font-size: 1.1rem; font-weight: 700; } } }
+
+.mobile-reserve { display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 90; background: $surface; border-top: 1px solid $border; padding: 12px 16px; justify-content: space-between; align-items: center; box-shadow: 0 -8px 30px rgba($dark, 0.08);
+  strong { font-family: $font-heading; font-size: 1.6rem; } small { color: $text-muted; } @include down($bp-lg) { display: flex; } }
+
+// Reviews
+.reviews { display: grid; gap: 28px; justify-items: start;
+  &__summary { display: grid; grid-template-columns: auto 1fr; gap: 40px; align-items: center; width: 100%; padding: 28px; background: $surface; border: 1px solid $border; border-radius: $radius-lg; @include down($bp-sm) { grid-template-columns: 1fr; gap: 24px; } }
+  &__score { display: flex; flex-direction: column; strong { font-family: $font-heading; font-size: 4.2rem; line-height: 1; font-weight: 500; } span { font-weight: 600; } small { color: $text-muted; } }
+  &__bars { display: grid; gap: 8px; > div { display: grid; grid-template-columns: 34px 1fr 36px; align-items: center; gap: 12px; font-size: 0.82rem; svg { display: inline; color: #f5a623; } i { height: 6px; background: $bg-alt; border-radius: 3px; overflow: hidden; b { display: block; height: 100%; background: $accent; } } small { color: $text-muted; } } }
+  &__list { display: grid; gap: 16px; width: 100%; grid-template-columns: repeat(2, 1fr); @include down($bp-md) { grid-template-columns: 1fr; } } }
+.review { padding: 24px; background: $surface; border: 1px solid $border; border-radius: $radius-lg; display: flex; flex-direction: column; gap: 10px;
+  header { display: flex; align-items: center; gap: 12px; > div { display: flex; flex-direction: column; flex: 1; line-height: 1.3; } small { color: $text-muted; font-size: 0.78rem; } }
+  &__avatar { width: 40px; height: 40px; border-radius: 50%; background: $accent; color: $on-accent; display: grid; place-items: center; font-weight: 600; }
+  &__rating { display: inline-flex; align-items: center; gap: 4px; font-weight: 600; svg { color: #f5a623; } }
+  h5 { font-family: $font-heading; font-size: 1.3rem; font-weight: 500; } p { color: $text-muted; font-size: 0.93rem; } }

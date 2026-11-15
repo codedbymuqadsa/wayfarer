@@ -1,0 +1,13 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.site-footer { background: $dark; color: rgba($white, 0.75); padding: 88px 0 32px; margin-top: 0;
+  &__top { display: grid; grid-template-columns: 1.6fr repeat(4, 1fr); gap: 40px; padding-bottom: 56px; border-bottom: 1px solid rgba($white, 0.12);
+    @include down($bp-lg) { grid-template-columns: repeat(2, 1fr); .site-footer__brand { grid-column: 1 / -1; } } @include down($bp-sm) { grid-template-columns: 1fr 1fr; gap: 32px 20px; } }
+  &__brand p { margin: 20px 0 24px; max-width: 34ch; font-size: 0.95rem; }
+  &__col { h4 { font-family: $font-body; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: $white; margin-bottom: 20px; font-weight: 600; } ul { display: grid; gap: 12px; } a { font-size: 0.92rem; transition: color 0.2s; &:hover { color: $white; } } }
+  &__news { display: flex; align-items: center; justify-content: space-between; gap: 32px; padding: 40px 0; border-bottom: 1px solid rgba($white, 0.12); flex-wrap: wrap; h4 { font-size: 1.8rem; color: $white; margin-bottom: 6px; } p { font-size: 0.92rem; } .newsletter-form { flex: 1; min-width: 280px; max-width: 520px; } }
+  &__bottom { display: flex; justify-content: space-between; gap: 12px; padding-top: 28px; font-size: 0.8rem; flex-wrap: wrap; color: rgba($white, 0.5); } }
+
+.socials { display: flex; gap: 10px; a { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba($white, 0.25); display: grid; place-items: center; transition: all 0.25s; &:hover { background: $surface; color: $dark; border-color: $white; } }
+  &--dark a { border-color: $border; color: $text; &:hover { background: $accent; color: $on-accent; border-color: $text; } } }

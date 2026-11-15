@@ -1,0 +1,31 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.logo { font-family: $font-heading; font-weight: 600; font-size: 1.45rem; letter-spacing: 0.3em; color: $text; white-space: nowrap; &--light { color: $white; } }
+
+.site-header { position: sticky; top: 0; z-index: 100; background: rgba($bg, 0.92); backdrop-filter: blur(14px); border-bottom: 1px solid transparent; transition: border-color 0.3s, box-shadow 0.3s;
+  &.is-scrolled { border-color: $border; box-shadow: 0 6px 24px rgba($dark, 0.05); }
+  &__inner { display: flex; align-items: center; gap: 24px; height: $header-h; }
+  &__burger { display: none; margin-left: -10px; }
+  &__actions { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+  &__trips { display: inline-flex; align-items: center; gap: 7px; padding: 10px 16px; margin: 0 6px; border-radius: 999px; border: 1px solid $border; font-size: 0.82rem; font-weight: 500; transition: all 0.25s; &:hover { background: $accent; color: $on-accent; border-color: $text; } }
+  @include down($bp-lg) { &__burger { display: inline-flex; } .logo { font-size: 1.3rem; letter-spacing: 0.24em; } &__inner { gap: 8px; } .logo { margin-right: auto; } &__actions { margin-left: 0; } }
+  @include down($bp-md) { &__trips { display: none; } }
+  @include down($bp-sm) { .logo { font-size: 1.2rem; letter-spacing: 0.22em; } &__inner { height: 64px; } } }
+
+.desktop-nav { display: flex; align-items: stretch; height: $header-h; margin-left: 28px; gap: 4px;
+  @include down($bp-lg) { display: none; }
+  &__item { position: relative; display: flex; align-items: center; }
+  &__link { display: flex; align-items: center; padding: 0 12px; font-size: 0.88rem; font-weight: 500; letter-spacing: 0.02em; position: relative; color: $text; transition: color 0.2s;
+    &::after { content: ''; position: absolute; left: 12px; right: 12px; bottom: 24px; height: 1px; background: $text; transform: scaleX(0); transform-origin: left; transition: transform 0.35s $ease; }
+    &:hover::after, &.is-active::after { transform: scaleX(1); } }
+  &__item &__link { padding-right: 2px; &::after { right: 2px; } }
+  &__chevron { width: 24px; height: 100%; display: grid; place-items: center; color: $text-muted; svg { transition: transform 0.3s; } }
+  &__item.is-open &__chevron svg { transform: rotate(180deg); } }
+
+.dropdown { position: absolute; top: 100%; left: 0; min-width: 270px; background: $surface; border: 1px solid $border; border-radius: 0 0 $radius-lg $radius-lg; box-shadow: $shadow-md; padding: 10px; animation: fadeUp 0.25s $ease both; z-index: 90;
+  &[hidden] { display: none; }
+  &--right { left: auto; right: 0; top: calc(100% + 10px); border-radius: $radius-lg; min-width: 240px; }
+  &__link { display: flex; flex-direction: column; gap: 2px; padding: 11px 14px; border-radius: 8px; font-size: 0.92rem; transition: background 0.2s; &:hover { background: $bg-alt; } small { color: $text-muted; font-size: 0.78rem; } span { display: inline-flex; align-items: center; gap: 10px; svg { color: $accent-dark; } } }
+  &__user { padding: 12px 14px 14px; border-bottom: 1px solid $border; margin-bottom: 6px; display: flex; flex-direction: column; strong { font-family: $font-heading; font-size: 1.2rem; } small { color: $text-muted; } } }
+.account { position: relative; &__btn { display: inline-flex; align-items: center; gap: 4px; height: 42px; padding: 0 10px; border-radius: 999px; transition: background 0.2s; &:hover { background: $bg-alt; } svg:first-child { width: 20px; height: 20px; } } }

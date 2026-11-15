@@ -1,0 +1,92 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ----- Destination card -----
+.dest-grid { display: grid; gap: 24px; grid-template-columns: repeat(4, 1fr);
+  &--3 { grid-template-columns: repeat(3, 1fr); }
+  @include down($bp-lg) { &, &--3 { grid-template-columns: repeat(2, 1fr); } }
+  @include down($bp-sm) { &, &--3 { grid-template-columns: 1fr; } } }
+.dest-card { position: relative; border-radius: $radius-lg; overflow: hidden; background: $dark; @include card-hover;
+  &__link { display: block; position: relative; color: $white; }
+  &__media { aspect-ratio: 4 / 5; overflow: hidden; img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s $ease; } }
+  &:hover &__media img { transform: scale(1.06); }
+  &--tall &__media { aspect-ratio: 3 / 4; }
+  &__shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba($overlay, 0.18) 0%, rgba($overlay, 0.35) 35%, rgba($overlay, 0.94) 100%); }
+  &__body { position: absolute; left: 0; right: 0; bottom: 0; padding: 22px; display: flex; flex-direction: column; gap: 6px;
+    h3 { font-size: 1.9rem; line-height: 1; } p { font-size: 0.88rem; color: rgba($white, 0.82); @include truncate-lines(2); } }
+  &__country { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: $white; font-weight: 600; text-shadow: 0 1px 8px rgba(0,0,0,.6); }
+  &__season { display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; color: rgba($white, 0.8); margin-top: 2px; }
+  &__cta { display: inline-flex; align-items: center; gap: 4px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 8px; padding-bottom: 2px; border-bottom: 1px solid rgba($white, 0.5); align-self: flex-start; transition: gap 0.3s; }
+  &:hover &__cta { gap: 9px; } }
+
+// ----- Hotel card -----
+.hotel-grid { display: grid; gap: 28px;
+  &--c3 { grid-template-columns: repeat(3, 1fr); }
+  &--c2 { grid-template-columns: repeat(2, 1fr); }
+  &--list { grid-template-columns: 1fr; gap: 20px; }
+  @include down($bp-lg) { &--c3 { grid-template-columns: repeat(2, 1fr); } }
+  @include down($bp-md) { &--c2 { grid-template-columns: repeat(2, 1fr); } }
+  @include down($bp-sm) { &--c3, &--c2 { grid-template-columns: 1fr; } } }
+.hotel-card { position: relative; background: $surface; border: 1px solid $border; border-radius: $radius-lg; overflow: hidden; display: flex; flex-direction: column; @include card-hover;
+  &__media { display: block; position: relative; aspect-ratio: 4 / 3; overflow: hidden; img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s $ease; } }
+  &:hover &__media img { transform: scale(1.05); }
+  &__type { position: absolute; left: 14px; top: 14px; padding: 5px 12px; background: rgba($surface, 0.94); border-radius: 999px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+  &__flag { position: absolute; left: 14px; bottom: 14px; padding: 5px 12px; background: #c4492a; color: $white; border-radius: 999px; font-size: 0.7rem; font-weight: 600; }
+  &__body { padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 8px; flex: 1; h3 { font-size: 1.45rem; } }
+  &__top { display: flex; justify-content: space-between; align-items: center; }
+  &__loc { display: flex; align-items: center; gap: 6px; color: $text-muted; font-size: 0.88rem; }
+  &__desc { color: $text-muted; font-size: 0.92rem; @include truncate-lines(3); }
+  &__amenities { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 4px 0 8px; li { display: inline-flex; align-items: center; gap: 5px; font-size: 0.78rem; color: $text-muted; svg { color: $accent; } } }
+  &__foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin-top: auto; padding-top: 14px; border-top: 1px solid $border; }
+  &__price { display: flex; flex-direction: column; gap: 2px; small { color: $text-muted; font-size: 0.78rem; } strong { font-family: $font-heading; font-size: 1.7rem; font-weight: 600; } }
+  &__score { font-size: 0.72rem; font-weight: 700; color: $accent-dark; text-transform: uppercase; letter-spacing: 0.1em; }
+  &--list { flex-direction: row; &:hover { transform: translateY(-2px); }
+    .hotel-card__media { width: 320px; aspect-ratio: auto; flex-shrink: 0; min-height: 240px; }
+    @include down($bp-md) { flex-direction: column; .hotel-card__media { width: 100%; aspect-ratio: 16 / 10; min-height: 0; } } } }
+
+// ----- Experience card -----
+.exp-grid { display: grid; gap: 28px; grid-template-columns: repeat(3, 1fr);
+  @include down($bp-lg) { grid-template-columns: repeat(2, 1fr); } @include down($bp-sm) { grid-template-columns: 1fr; } }
+.exp-card { position: relative; background: $surface; border: 1px solid $border; border-radius: $radius-lg; overflow: hidden; display: flex; flex-direction: column; @include card-hover;
+  &__media { display: block; position: relative; aspect-ratio: 5 / 4; overflow: hidden; img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s $ease; } }
+  &:hover &__media img { transform: scale(1.05); }
+  &__cat { position: absolute; left: 14px; bottom: 14px; padding: 5px 12px; background: $dark; color: $white; border-radius: 999px; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; }
+  &__body { padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 10px; flex: 1; h3 { font-size: 1.4rem; line-height: 1.2; } }
+  &__loc { display: flex; align-items: center; gap: 6px; font-size: 0.82rem; color: $text-muted; }
+  &__meta { display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: $text-muted; span { display: inline-flex; align-items: center; gap: 6px; } }
+  &__foot { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 14px; border-top: 1px solid $border; strong { font-family: $font-heading; font-size: 1.6rem; } small { color: $text-muted; font-size: 0.78rem; } } }
+
+// ----- Wish card -----
+.wish-grid { display: grid; gap: 24px; grid-template-columns: repeat(3, 1fr); @include down($bp-lg) { grid-template-columns: repeat(2, 1fr); } @include down($bp-sm) { grid-template-columns: 1fr; } }
+.wish-card { background: $surface; border: 1px solid $border; border-radius: $radius-lg; overflow: hidden; display: flex; flex-direction: column;
+  &__media { display: block; position: relative; aspect-ratio: 4 / 3; overflow: hidden; img { width: 100%; height: 100%; object-fit: cover; } .tag { position: absolute; left: 14px; top: 14px; background: rgba($surface, 0.94); color: $text; } }
+  &__body { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 8px; h3 { font-size: 1.4rem; } p { display: flex; align-items: center; gap: 6px; font-size: 0.88rem; } }
+  &__meta { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: center; font-size: 0.88rem; }
+  &__actions { display: flex; gap: 8px; margin-top: 10px; padding-top: 14px; border-top: 1px solid $border; justify-content: space-between; } }
+
+// ----- To-do card, guide card -----
+.todo-grid { display: grid; gap: 28px; grid-template-columns: repeat(3, 1fr); @include down($bp-lg) { grid-template-columns: repeat(2, 1fr); } @include down($bp-sm) { grid-template-columns: 1fr; } }
+.todo-card { background: $surface; border-radius: $radius-lg; overflow: hidden; border: 1px solid $border; @include card-hover;
+  &__media { aspect-ratio: 16 / 10; overflow: hidden; img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s $ease; } }
+  &:hover &__media img { transform: scale(1.05); }
+  &__body { padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 10px; align-items: flex-start; h3 { font-size: 1.45rem; } p { color: $text-muted; font-size: 0.93rem; } } }
+.guide-grid { display: grid; gap: 20px; grid-template-columns: repeat(3, 1fr); @include down($bp-lg) { grid-template-columns: repeat(2, 1fr); } @include down($bp-sm) { grid-template-columns: 1fr; } }
+.guide-card { background: $surface; border: 1px solid $border; border-radius: $radius-lg; padding: 26px;
+  &__head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; svg { color: $accent-dark; } h3 { font-size: 1.35rem; } }
+  ul { display: grid; gap: 10px; li { position: relative; padding-left: 18px; font-size: 0.93rem; color: $text-muted; &::before { content: ''; position: absolute; left: 0; top: 0.7em; width: 6px; height: 1px; background: $accent; } } } }
+
+// ----- Category / showcase -----
+.category-grid { display: grid; gap: 20px; grid-template-columns: repeat(3, 1fr); @include down($bp-lg) { grid-template-columns: repeat(2, 1fr); } @include down($bp-sm) { grid-template-columns: 1fr; } }
+.category-card { position: relative; aspect-ratio: 4 / 3; border-radius: $radius-lg; overflow: hidden; color: $white; display: block;
+  img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s $ease; } &:hover img { transform: scale(1.06); }
+  &__shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba($overlay, 0.2) 0%, rgba($overlay, 0.4) 40%, rgba($overlay, 0.92) 100%); }
+  &__text { position: absolute; inset: auto 0 0 0; padding: 24px 26px; h3 { font-size: 1.9rem; } p { color: rgba($white, 0.8); font-size: 0.9rem; }
+    span { position: absolute; right: 22px; bottom: 24px; width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba($white, 0.5); display: grid; place-items: center; transition: all 0.3s; } }
+  &:hover &__text span { background: $surface; color: $text; } }
+.exp-showcase { display: grid; gap: 16px; grid-template-columns: repeat(6, 1fr); grid-auto-rows: 260px;
+  &__item { position: relative; border-radius: $radius-lg; overflow: hidden; grid-column: span 2; color: $white; img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s $ease; } &:hover img { transform: scale(1.06); }
+    &:nth-child(1), &:nth-child(2) { grid-column: span 3; } }
+  &__shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba($overlay, 0.2) 0%, rgba($overlay, 0.4) 35%, rgba($overlay, 0.92) 100%); }
+  &__text { position: absolute; left: 0; right: 0; bottom: 0; padding: 22px; h3 { font-size: 1.7rem; } p { font-size: 0.88rem; color: rgba($white, 0.82); } }
+  @include down($bp-lg) { grid-template-columns: repeat(2, 1fr); &__item, &__item:nth-child(n) { grid-column: span 1; } &__item:nth-child(5) { grid-column: span 2; } }
+  @include down($bp-sm) { grid-template-columns: 1fr; grid-auto-rows: 220px; &__item:nth-child(5) { grid-column: span 1; } } }

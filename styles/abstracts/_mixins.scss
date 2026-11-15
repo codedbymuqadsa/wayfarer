@@ -1,0 +1,11 @@
+@use 'variables' as *;
+
+@mixin up($bp) { @media (min-width: $bp) { @content; } }
+@mixin down($bp) { @media (max-width: $bp - 1px) { @content; } }
+
+@mixin container { width: 100%; max-width: $container; margin: 0 auto; padding: 0 $gutter; @include down($bp-sm) { padding: 0 16px; } }
+@mixin flex-center { display: flex; align-items: center; justify-content: center; }
+@mixin eyebrow { font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 600; color: $accent-dark; }
+@mixin card-hover { transition: transform 0.4s $ease, box-shadow 0.4s $ease; &:hover { transform: translateY(-4px); box-shadow: $shadow-md; } }
+@mixin truncate-lines($n: 2) { display: -webkit-box; -webkit-line-clamp: $n; -webkit-box-orient: vertical; overflow: hidden; }
+@mixin focus-ring { &:focus-visible { outline: 2px solid $accent; outline-offset: 2px; } }

@@ -1,0 +1,50 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.planner-intro { display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; align-items: start; @include down($bp-lg) { grid-template-columns: 1fr; gap: 32px; }
+  &__text { display: flex; flex-direction: column; gap: 16px; position: sticky; top: calc(#{$header-h} + 20px); @include down($bp-lg) { position: static; } }
+  &__form { background: $surface; border: 1px solid $border; border-radius: $radius-lg; padding: 32px; box-shadow: $shadow-md; @include down($bp-sm) { padding: 20px; } } }
+.planner-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+
+.trip-overview { display: grid; grid-template-columns: 340px 1fr; background: $surface; border: 1px solid $border; border-radius: $radius-lg; overflow: hidden; margin-bottom: 48px; @include down($bp-md) { grid-template-columns: 1fr; }
+  &__media { position: relative; min-height: 240px; img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; } }
+  &__shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba($overlay, 0.25) 0%, rgba($surface, 0.9) 100%); }
+  &__body { padding: 32px 36px; display: flex; flex-direction: column; gap: 14px; h2 { font-size: clamp(1.9rem, 3vw, 2.6rem); } p { color: $text-muted; max-width: 60ch; } @include down($bp-sm) { padding: 24px 20px; } }
+  &__stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 18px; margin: 8px 0; li { display: flex; gap: 12px; align-items: flex-start; svg { color: $accent-dark; margin-top: 3px; flex-shrink: 0; } span { display: flex; flex-direction: column; } small { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.14em; color: $text-muted; } strong { font-weight: 600; font-size: 0.95rem; } } }
+  &__actions { display: flex; gap: 10px; flex-wrap: wrap; } }
+
+.itinerary-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; h2 { display: flex; align-items: center; gap: 12px; svg { color: $accent-dark; } } }
+.itinerary { display: grid; gap: 20px; }
+.itin-day { background: $surface; border: 1px solid $border; border-radius: $radius-lg; padding: 24px 28px; @include down($bp-sm) { padding: 18px; }
+  &.is-outside { border-style: dashed; background: transparent; }
+  &__head { display: flex; align-items: center; gap: 18px; margin-bottom: 18px; flex-wrap: wrap; > div { flex: 1; min-width: 160px; } h4 { font-size: 1.5rem; } }
+  &__num { padding: 8px 16px; border-radius: 999px; background: $accent; color: $on-accent; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+  &__list { display: grid; gap: 10px; position: relative; }
+  &__empty { padding: 20px; border: 1px dashed $border; border-radius: $radius; color: $text-muted; font-size: 0.92rem; text-align: center; } }
+.activity { display: grid; grid-template-columns: 96px 1fr auto; gap: 18px; align-items: start; padding: 16px 18px; background: $bg; border: 1px solid $border; border-radius: $radius; transition: border-color 0.2s, box-shadow 0.2s; &:hover { border-color: $accent; box-shadow: $shadow-sm; }
+  &__time { font-size: 0.82rem; font-weight: 700; color: $accent-dark; letter-spacing: 0.04em; padding-top: 3px; }
+  &__body { display: flex; flex-direction: column; gap: 4px; min-width: 0; h5 { font-family: $font-heading; font-size: 1.3rem; font-weight: 500; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; } p { display: flex; align-items: flex-start; gap: 6px; font-size: 0.88rem; color: $text-muted; svg { margin-top: 3px; flex-shrink: 0; } } }
+  &__actions { display: flex; gap: 2px; button { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; color: $text-muted; transition: all 0.2s; &:hover:not(:disabled) { background: $surface; color: $text; } &:disabled { opacity: 0.25; cursor: not-allowed; } &.is-danger:hover { color: $danger; } } }
+  @include down($bp-sm) { grid-template-columns: 1fr; gap: 8px; &__actions { justify-content: flex-end; } } }
+.activity-form__ideas { display: grid; gap: 8px; small { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.14em; color: $text-muted; font-weight: 700; } }
+
+// My Trips
+.mytrips-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; &__actions { display: flex; gap: 10px; } }
+.booking-list, .trip-list { display: grid; gap: 20px; }
+.booking-card { display: grid; grid-template-columns: 260px 1fr; background: $surface; border: 1px solid $border; border-radius: $radius-lg; overflow: hidden; @include down($bp-md) { grid-template-columns: 1fr; }
+  &__media { min-height: 190px; img { width: 100%; height: 100%; object-fit: cover; } @include down($bp-md) { aspect-ratio: 16 / 9; min-height: 0; } }
+  &__body { padding: 24px 28px; display: flex; flex-direction: column; gap: 10px; h3 { font-size: 1.7rem; } }
+  &__top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  &__ref { display: inline-flex; align-items: center; gap: 4px; font-size: 0.82rem; color: $text-muted; letter-spacing: 0.08em; font-weight: 600; }
+  &__meta { display: grid; gap: 6px; font-size: 0.9rem; color: $text-muted; li { display: flex; gap: 8px; align-items: center; } }
+  &__foot { margin-top: auto; padding-top: 10px; } }
+.trip-card { display: grid; grid-template-columns: 260px 1fr; background: $surface; border: 1px solid $border; border-radius: $radius-lg; overflow: hidden; @include down($bp-md) { grid-template-columns: 1fr; }
+  &__media { position: relative; min-height: 200px; img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; } .tag { position: absolute; left: 14px; top: 14px; background: rgba($surface, 0.94); color: $text; } @include down($bp-md) { min-height: 0; aspect-ratio: 16 / 9; } }
+  &__body { padding: 24px 28px; display: flex; flex-direction: column; gap: 10px; h3 { font-size: 1.7rem; } }
+  &__meta { display: grid; gap: 6px; font-size: 0.9rem; color: $text-muted; li { display: flex; gap: 8px; align-items: center; } }
+  &__desc { color: $text-muted; font-size: 0.92rem; @include truncate-lines(2); }
+  &__actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; padding-top: 12px; } }
+.itin-saved { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; padding: 24px 28px; background: $surface; border: 1px solid $border; border-radius: $radius-lg; h3 { font-size: 1.6rem; } &__actions { display: flex; gap: 10px; flex-wrap: wrap; } }
+.booking-detail { &__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+  &__grid { display: grid; grid-template-columns: 1fr 360px; gap: 32px; align-items: start; @include down($bp-md) { grid-template-columns: 1fr; } h4 { font-size: 1.3rem; margin: 18px 0 6px; &:first-child { margin-top: 0; } } p { color: $text-muted; } }
+  .booking-summary { position: static; box-shadow: none; } }
